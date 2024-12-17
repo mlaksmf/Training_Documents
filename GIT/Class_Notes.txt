@@ -1,0 +1,106 @@
+	
+#######################
+Day 2 : 17th Dec. 2024
+#######################		
+
+Version Control System Using GIT ::: Source Code Repository(GITHUB)
+
+	Lab :::
+	
+		1. Create GITHUB Account -- Maintain the Documents/Source Code
+		
+			https://github.com/	
+			
+			
+		2. Create AWS Cloud Free Tier Account - 12 Months 
+		
+			https://aws.amazon.com/console/
+		
+			- Active Email_ID,Mobile_Number,Credit/Debit Card
+			
+			- Create Virtual Machines(EC2 Instances)
+			
+			
+		3. DockerHub Account 
+		
+			https://hub.docker.com/
+		
+		
+Version Control System Using GIT ::: Source Code Repository(GITHUB)			
+		
+Overview of Version Control System :::
+
+	Version Control System :
+	
+		- Is used to Version Control the Source Code Changes.
+
+		- Is used to track the Source Code Changes.
+	
+
+	Create Project Folder 
+	
+	Java_Web_APP_Project - Folder/Workspace 
+	
+		- src
+			- main
+				*.java 
+			- test 
+				*.java
+		- resource 
+			- index.html
+			- *.css 
+			- *.js 		
+		- target 
+			- *.war
+
+
+	index.html
+	
+	------
+	-
+	--
+	
+	-
+	-
+	-
+	-
+	
+	save as index.html & Unit Testing 
+	
+	Edit index.html 
+	
+	------
+	-
+	--
+	asdfasdf
+	-asdf
+	-
+	-asdf
+	-	
+	
+	save as index.html & Unit Testing 
+	
+		Using Version Control System :
+		
+			index.html				index.html_v1.0			# v1.0 - Tag/Commit_id/Version_Number
+			index.html				index.html_v1.1			# v1.0 - Tag/Commit_id/Version_Number
+			index.html				index.html_v1.2	
+			index.html				index.html_v1.3	
+			index.html				index.html_v1.4	
+			index.html				index.html_v1.5	
+			
+	Type of Version Control System :
+	
+		- Local VCS 
+		
+		- Centralized VCS 
+		
+		- Distributed VCS 
+		
+		
+	GIT ::
+	
+		- GIT is Open-Source Distributed VCS.
+		- Is used to Version Control the Source Code Changes.
+		- Is used to track the Source Code Changes.		
+		- Is used to perform parallel development using Branching Techniques.
