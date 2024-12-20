@@ -906,3 +906,390 @@ Day 4 : 19th Dec. 2024
   682  cd ..
   683  history
 
+
+#######################
+Day 5 : 20th Dec. 2024
+#######################	
+
+	Working GIT Branches
+	
+	Remote Repositories
+	
+	
+	- Merge Conflict ::
+	
+		- When more than one user/feature try to update the same file at the same record level, Merge conflict occurs in the target branch.
+	
+	
+	- How to fix Merge Conflict Merge Conflict ?
+	
+		1. Identify the file(s) causing the Merge Conflict 
+		2. Open and review the file content
+		3. Upon review, decide which record should be retained or deleted from that file
+		4. Open the File in edit mode, and delete the header and footer lines, and update the file with required records and save it.
+		5. perform git add and commit to the target branch 	
+		
+	- As per DevOps Strategies, 
+	
+		- Prevent the Merge Conflicts!
+		
+
+	- GIT Rebase :::
+
+	
+		- Git Rebase is used to keep the Current Branch in-sync with the target branch.
+		- Git Rebase is used to maintain the Linear Commit History in the Target Branch.
+		- As a best practise, it is always recommended to use rebase before merge action.
+		
+		- With this, we can prevent merge conflicts in the target branch(master).
+		
+		
+		Repo1 :
+		
+			master: cm1,cm2,cm3 
+					
+					cm1,cm2,cm3,f1cm1,f1cm2,f1cm3			# Upon Merging feature1
+					
+					cm1,cm2,cm3,f2cm1,f2cm2,f2cm3,f1cm1,f1cm2,f1cm3			# Upon Merge feature2 without proper rebase.
+					
+					cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3			# Upon Merge feature2 with proper rebase.
+			
+			
+				feature1: cm1,cm2,cm3 
+				
+					cm1,cm2,cm3,f1cm1,f1cm2,f1cm3
+					
+					git switch master 
+					
+					git merge feature1 
+					
+					
+				
+				feature2: cm1,cm2,cm3 
+				
+					cm1,cm2,cm3,f2cm1,f2cm2,f2cm3
+					
+					git rebase master 							# Should be executed from current branch 
+		
+					cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3
+					
+					git switch master 
+					
+					git merge feature2 							# Should be executed from target branch 	
+					
+					
+	- GIT Merge --squash :::
+	
+	
+		- It is used to Combine more than one one into single commit point. 
+		- This adds the changes from current branch to the staging area of target branch
+		- Give explicit Commit in the target branch.
+		
+		
+		Repo1 :
+			master : cm1,cm2,cm3 
+				
+					cm1,cm2,cm3,f1cm1,2,3,4,5,6,7,8,9,.......................
+			
+			feature1: cm1,cm2,cm3,f1cm1,2,3,4,5,6,7,8,9,.......................
+	
+			git switch master 
+            
+		    git merge --squash feature1 
+			
+	
+	- GIT Cherry-Pick ::
+	
+			- Used to Merge the specific commit into the target branch 
+			- GIT Cherry-Pick is NOT Recommended to use.
+			
+		git cherry-pick <commit_id> <commit_id>
+		
+	
+
+	- git commit :::
+	
+		git commit -m "Commit Messages" 
+		
+		git commit -m "CR1001 - Updated payment module" 		
+		
+		git commit -m "UserStoryID# - Updated payment module" 		
+		
+		git commit -m "asdfasdfasdf"
+
+		git commit --amend -m "Valid Commit Message!"
+
+
+	GIT STASH :::	
+	
+		- Is used to save the uncommitted Changes to a temporary area!
+		
+		git stash list 				# To list the entries from stash list.
+		
+		git stash save "Messasge"	# To create a stash entry in the stash list.
+		
+		git stash apply				# To apply the latest entry from stash list, back to staging area 
+		
+		git stash apply stash@{3}	# To apply a specific entry from stash list, back to staging area
+		
+		git stash drop				# To delete/remove the latest entry from stash list		
+		
+		git stash drop stash@{3}	# To delete/remove a specific entry from stash list		
+		
+		git stash pop 				# To apply a specific entry from stash list, back to staging area 
+									# To delete/remove a specific entry from stash list
+	
+		git stash pop stash@{3}		# To apply a specific entry from stash list, back to staging area 
+		                            # To delete/remove a specific entry from stash list
+	
+		git stash clear				# To Clean-up the Stash List.
+									# Permanent removal of all changes from stash list.
+		
+		
+  501  cd d:
+  502  ls
+  503  cd DCP-Dec16-2024/
+  504  clear
+  505  ls
+  506  mkdir samplerepo1
+  507  cd samplerepo1/
+  508  clear
+  509  git init
+  510  echo "rec1" >> f1.txt
+  511  git add .
+  512  git commit -m "cm1"
+  513  clear
+  514  git log --oneline
+  515  ls
+  516  git branch feature1
+  517  git branch feature2
+  518  git switch feature1
+  519  ls
+  520  git log --oneline
+  521  echo "Rec1" >> s1.txt
+  522  git add .
+  523  git commit -m "f1cm1"
+  524  git switch master
+  525  git merge feature1
+  526  ls
+  527  git log --oneline
+  528  cd ..
+  529  mkdir samplerepo2
+  530  cd samplerepo
+  531  cd samplerepo2/
+  532  git init
+  533  echo "rec1" >> q1.txt
+  534  git add .
+  535  git commit -m "cm1"
+  536  git branch feature1
+  537  git branch feature2
+  538  git branch
+  539  git switch feature1
+  540  ls
+  541  git log --oneline
+  542  cat q1.txt
+  543  echo "record2 from feature1" >> q1.txt
+  544  cat q1.txt
+  545  git add .
+  546  git commit -m "f1cm1"
+  547  git log --oneline
+  548  git switch master
+  549  ls
+  550  cat q1.txt
+  551  git log --oneline
+  552  git merge feature1
+  553  cat q1.txt
+  554  git log --oneline
+  555  git switch feature2
+  556  cat q1.txt
+  557  git log --oneline
+  558  echo "record2 from feature2" >> q1.txt
+  559  git add .
+  560  git commit -m "f2cm1"
+  561  git log --oneline
+  562  cat q1.txt
+  563  git switch master
+  564  git merge feature2
+  565  cat q1.txt
+  566  vi q1.txt
+  567  git add .
+  568  git commit -m "fixed MC"
+  569  clear
+  570  ls
+  571  cd ..
+  572  mkdir samplerepo3
+  573  cd samplerepo3/
+  574  git init
+  575  clear
+  576  echo "rec1" >> a1.txt
+  577  git add .
+  578  git commit -m "cm1"
+  579  echo "rec1" >> a2.txt
+  580  git add .
+  581  git commit -m "cm2"
+  582  clear
+  583  git log --oneline
+  584  ls
+  585  git branch feature1
+  586  git branch feature2
+  587  git log --oneline
+  588  git switch feature1
+  589  git log --oneline
+  590  ls
+  591  echo "rec1" >> q1.txt
+  592  git add .
+  593  git commit -m "f1cm1"
+  594  echo "rec1" >> q2.txt
+  595  git add .
+  596  git commit -m "f1cm2"
+  597  echo "rec1" >> q3.txt
+  598  git add .
+  599  git commit -m "f1cm3"
+  600  git log --oneline
+  601  git rebase master
+  602  git switch master
+  603  git merge feature1
+  604  ll
+  605  git log --oneline
+  606  git switch feature2
+  607  git log --oneline
+  608  echo "rec1" >> w1.txt
+  609  git add .
+  610  git commit -m "f2cm1"
+  611  echo "rec1" >> w2.txt
+  612  git add .
+  613  git commit -m "f2cm2"
+  614  echo "rec1" >> w3.txt
+  615  git add .
+  616  git commit -m "f2cm3"
+  617  git log --oneline
+  618  git rebase master
+  619  git log --oneline
+  620  git switch master
+  621  git merge feature2
+  622  git log --oneline
+  623  git switch feature1
+  624  git log --oneline
+  625  git rebase master
+  626  git log --oneline
+  627  git log --oneline
+  628  echo "rec1" >> z1.txt
+  629  git add .
+  630  git commit -m "f1"
+  631  echo "rec1" >> z2.txt
+  632  git add .
+  633  git commit -m "f2"
+  634  echo "rec1" >> z3.txt
+  635  git add .
+  636  git commit -m "f3"
+  637  echo "rec1" >> z4.txt
+  638  git add .
+  639  git commit -m "f4"
+  640  echo "rec1" >> z5.txt
+  641  git add .
+  642  git commit -m "f5"
+  643  clear
+  644  git log --oneline
+  645  git rebase master
+  646  ls
+  647  git switch master
+  648  git merge --squash feature1
+  649  git commit -m "combined changes from feature1"
+  650  git log --oneline
+  651  ls
+  652  clear
+  653  git switch feature1
+  654  git status
+  655  git log --oneline
+  656  echo "rec1" >> e1.txt
+  657  git add .
+  658  git commit -m "adsfasd"
+  659  git log --oneline
+  660  git commit -m "Valid Message!"
+  661  git commit --amend -m "Valid Message!"
+  662  git log --oneline
+  663  clear
+  664  git status
+  665  echo "rec1" >> k1.txt
+  666  git add .
+  667  git switch master
+  668  git status
+  669  git switch feature1
+  670  git status
+  671  git stash save "for k1.txt"
+  672  git stash list
+  673  git status
+  674  ls
+  675  echo "rec1" >> k2.txt
+  676  git add .
+  677  git stash save "for k2.txt"
+  678  git stash list
+  679  echo "rec1" >> k3.txt
+  680  git add .
+  681  git stash save "for k3.txt"
+  682  git stash list
+  683  echo "rec1" >> k4.txt
+  684  git add .
+  685  git stash save "for k4.txt"
+  686  echo "rec1" >> k5.txt
+  687  git add .
+  688  git stash save "for k5.txt"
+  689  echo "rec1" >> k6.txt
+  690  git add .
+  691  git stash save "for k6.txt"
+  692  echo "rec1" >> k7.txt
+  693  git add .
+  694  git stash save "for k7.txt"
+  695  echo "rec1" >> k8.txt
+  696  git add .
+  697  git stash save "for k8.txt"
+  698  git stash list
+  699  ls
+  700  git status
+  701  git stash apply
+  702  ls
+  703  git commit -m "k8.txt"
+  704  git stash list
+  705  git stash drop
+  706  git stash list
+  707  git status
+  708  git stash pop
+  709  git stash list
+  710  git status
+  711  git commit -m "k7.txt"
+  712  git stash apply stash@{3}
+  713  git stash list
+  714  git commit -m "k7"
+  715  git stash drop stash@{3}
+  716  git stash pop stash@{3}
+  717  git stash list
+  718  clear
+  719  git commit -m "asdfasd"
+  720  git status
+  721  git stash list
+  722  git stash clear
+  723  git stash list
+  724  echo "rec1" >> jj.txt
+  725  git stash save "asdf"
+  726  git branch
+  727  cd ..
+  728  cd ..
+  729  clear
+  730  history
+
+Next :::
+		
+	- Remote Repositories :::
+	
+		- GITHUB :::
+		
+		How to create Repos in GITHUB 
+		
+		Pull Request:
+		
+		clone 
+		
+		pull / fetch 
+	
+		push 
+	
