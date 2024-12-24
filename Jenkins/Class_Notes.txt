@@ -1,0 +1,105 @@
+#######################
+Day 6 : 23rd Dec. 2024
+#######################	
+
+	- Build Orchestration Tool - Jenkins
+
+	Automate :
+	
+		- Build the Source Code 	
+			- Process of Compiling the Source Code & Create Artifacts(Binaries - *.war/*.jar/*.dll/*.exc) 
+		- Perform Unit Testing 
+		- Promote the Changes to Further Testing Environments
+		- Send Email Notifications to Testing Teams 
+		
+	Jenkins CICD Pipeline Projects ::
+	
+	What is Jenkins ?
+		- Open-Source Build Orchestration Tool 
+		- Used to Automation Application Builds and Deployment and any process automation
+		
+	Architecture of Jenkins :
+	
+		Master-Slave Architecture :
+	
+			Jenkins_Master Node(VM) - 	Install jdk,Jenkins,maven 
+										Used to Create Jenkins CICD Pipelines Projects and schedule to run in the slave nodes.
+										
+				Jenkins_Slave_Node(VM) - Used to Build the application.
+				
+		Jenkins_Master Node(VM)	: 	Create Jenkins CICD Pipelines Projects and schedule to run in the slave nodes.
+									Install jdk, jenkins, git 
+									
+			Jenkins_Slave_Node1(VM) :	Build Java Applications
+			Jenkins_Slave_Node2(VM) :	Build Python Applications
+			Jenkins_Slave_Node3(VM) :	Build .Net Applications
+			Jenkins_Slave_Node4(VM) :	Build .Ruby Applications
+			Jenkins_Slave_Node5(VM) :	Build Angular Applications
+			Jenkins_Slave_Node6(VM) :	Build NodeJS Applications
+			
+	Working with Jenkins :
+	
+	
+		Developers' Perspective : 
+	
+				- Developers are just the consumers
+				- Execute the Jenkins Projects/cancel project/Read
+
+
+		DevOps Team : 
+		
+			- Own Jenkins.
+			
+		Roles & Responsibilities :
+		
+			- Installation of Jenkins 
+			- Plugins Management 
+			- Global System Management
+			- Tools Management
+			- User Management
+			- Security Management
+			- Credential Management 
+			- Create Jenkins Master - Slave Node Setup 
+			- Create Jenkins CICD Projects and automations
+			- Onboard the application to CICD Pipeline 
+			- Trouble-shooting 
+			- Back-up and Recovery 
+			
+	AWS Account :
+		- Create Free-tier Account 
+		
+		- Create Virtual Machines - EC2 Instances - Ubuntu v22.04
+			1 VM - 750 Hrs/Month 
+			10 VMs - 75 Hrs/Month 
+		
+		- Connect to VM and manage Jenkins Tools and services
+		
+			- EC2 Instance Connect using AWS Console 
+			
+			- SSH Agents :
+				Putty
+				MobaXterm 					# https://mobaxterm.mobatek.net/download-home-edition.html
+													Choose MobaXTerm Installer Edition
+													Download *.zip
+													Extract and install.
+					- Host Name 
+					- User Name 
+					- Authentication Key
+					
+			- Terminal (Linux/MAc/Windows)
+			
+		
+			using apt-get / apt package manager install jenkins
+		
+		
+		Jenkins_Master Node(VM)	: 	Create Jenkins CICD Pipelines Projects and schedule to run in the slave nodes.
+									Install jdk, jenkins, git 
+									
+									https://www.jenkins.io/doc/book/installing/
+
+
+		Jenkins runs as service - used default port 8080
+		
+Next :
+
+	Install and Setup Jenkins Master Node.

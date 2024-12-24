@@ -1293,3 +1293,139 @@ Next :::
 	
 		push 
 	
+#######################
+Day 6 : 23rd Dec. 2024
+#######################	
+
+	Remote Repositories Handling using GitHub and GIT cli
+	
+		How to create Repos in GITHUB 
+		
+		Create Remote Branches in Remote Repository
+		
+		Merge the Changes using Pull Request 
+		
+		Pull Request:
+		
+		clone 
+		
+		pull / fetch 
+	
+		push 
+		
+		
+		git clone https://github.com/EDU-DCP-Dec16-2024/TestRepo2.git
+		
+		User Authentication can be enabled using 
+			- Access Token.
+			
+			Create Access TOken from GITHUB Account.
+				
+
+
+		git push -u origin main
+		
+		
+		git clone				# To copy/clone the entire Remote Repository to Local Machine
+	
+		git add 				# To Add the changes from Working Directory to Staging Area 
+		
+		git commit 				# To permanantly commit the changes from Staging Area to Local Repository
+		
+		git push				# To Push the Changes from Local Repository to Remote Repository
+		
+		git pull/git fetch 		# Both git pull and get fetch are used to handle the incremental changes from Remote Repository
+		
+					# git fetch ::
+							- Is used just check for the incremental changes in Remote Repository, if there are any changes exist, it will update the details only in the Local Repository. git fetch will not update the changes in working directory. From Local Repository, using git pull/merge we can update the details in the working directory.
+		
+
+					# git pull ::
+							- Is used check for the incremental changes in Remote Repository, if there are any changes exist, it will update the details in the Local Repository as well in the working directory. 		
+							
+							- git pull is always recommended to keep the Local Repository in-sync with Remote Repository
+							
+							git pull = git fetch + git merge	
+
+
+	New Project :
+	
+		git init 
+		
+		create empty remote repo 
+		
+		
+		git remote -v 
+		
+		git remote add origin https://github.com/EDU-DCP-Dec16-2024/TestRepo.git
+		
+		git remote remove origin
+		
+  501  cd d:
+  502  cd DCP-Dec16-2024/
+  503  ls
+  504  cd remoterepos
+  505  mkdir remoterepos
+  506  cd remoterepos/
+  507  clear
+  508  ls
+  509  git clone https://github.com/EDU-DCP-Dec16-2024/TestRepo2.git
+  510  ls
+  511  cd TestRepo2/
+  512  git remove -v
+  513  git remote -v
+  514  git status
+  515  git log --oneline
+  516  git switch -c local-feature1
+  517  git status
+  518  git log --oneline
+  519  echo "rec1" >> local-file1.txt
+  520  git add
+  521  git add .
+  522  git commit -m "create local-file1.txt"
+  523  git status
+  524  git log --oneline
+  525  git push -u origin main
+  526  git push -u origin local-feature1
+  527  clear
+  528  git switch main
+  529  git status
+  530  ls
+  531  git fetch
+  532  git status
+  533  ls
+  534  git pull
+  535  ls
+  536  git status
+  537  git status
+  538  git pull
+  539  ls
+  540  git fetch
+  541  git switch -c temp1
+  542  ls
+  543  clear
+  544  cd ..
+  545  clear
+  546  mkdir testrepo
+  547  cd testrepo
+  548  git init
+  549  echo "rec1" >> l1.txt
+  550  git add .
+  551  git commit -m "cm1"
+  552  clear
+  553  ls
+  554  git remote -v
+  555  ls
+  556  git remote add origin https://github.com/EDU-DCP-Dec16-2024/TestRepo.git
+  557  git remote -v
+  558  git remote remove origin
+  559  git remote -v
+  560  git remote add origin https://github.com/EDU-DCP-Dec16-2024/TestRepo.git
+  561  clear
+  562  git branch -M main
+  563  git branch -M master
+  564  git push -u origin master
+  565  cd ..
+  566  clear
+  567  history
+
