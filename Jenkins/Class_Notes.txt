@@ -103,3 +103,120 @@ Day 6 : 23rd Dec. 2024
 Next :
 
 	Install and Setup Jenkins Master Node.
+
+
+#######################
+Day 7 : 24th Dec. 2024
+#######################	
+
+			- Host Name 		
+			- User Name 
+			- Authentication Key
+			
+	- Installation of Jenkins 
+	- Plugins Management 
+	- Global System Management
+	- Tools Management
+	- User Management
+	- Security Management
+	- Credential Management 
+	
+	- Create Jenkins CICD Projects and automations
+	
+		- Create Jenkins Jobs/Projects ::
+		
+	- Free-Style Projects 
+		- Done using manual configurations
+
+		
+		Parameterized :
+		
+		Jenkins Jobs Variables :
+		
+			- Environment Variables 
+			
+				"${BUILD_NUMBER}"
+				
+			
+			- User-Defined Variables 
+			
+			
+			
+	- Pipeline Projects 
+		- Done using scripts - groovy script
+		- Pipeline Project composed of various stages
+		
+		- Scripted Pipelines :
+			- 
+		
+		- Declarative Pipelines :
+		
+		
+	Pipeline
+		stages 
+			stage1
+				steps
+					- # Actual Task
+			stage2
+				steps
+					- # Actual Task
+			stage3
+				steps
+					- # Actual Task
+					
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Hello1') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+
+	- Create Jenkins CICD Projects and automations
+	
+	Maven Build Tool :
+	
+		pom.xml 		# To identify the dependencies and plugins used to build the application
+		
+		maven goal		# To perform the - code compile/test/package
+		
+						# mvn compile 	- just compile and chk for compilation errors
+						# mvn test 		- perform compile and unit test 
+						# mvn package	- compile,test and create artifacts
+						# mvn clean package 	- clean-up the target folder & create package
+		
+	
+	
+pipeline {
+    agent any
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git <clone_url>
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Build - Compile & Create Artifacts'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Deploy to QA Test Server') {
+            steps {
+                echo 'Deploy the Artifacts to QA Server'
+            }
+        }
+    }
+}
