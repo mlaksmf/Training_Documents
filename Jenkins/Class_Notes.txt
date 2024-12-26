@@ -220,3 +220,105 @@ pipeline {
         }
     }
 }
+
+
+#######################
+Day 8 : 26th Dec. 2024
+#######################	
+
+	- Create Jenkins CICD Pipeline using Master Slave Architecture
+
+	- Environments :
+	
+		Non-Prod 												Production Environments
+	
+			- Dev Environment
+			- Build Environment
+			- Test Environments
+				- QA Test
+				- UAT Test				===============>			Production Servers
+	
+	
+	Jenkins_Master Node(VM)	: 	Create Jenkins CICD Pipelines Projects and schedule to run in the slave nodes.
+								Install jdk, jenkins, git 
+								
+		Jenkins_Slave1(VM)	: 	Install git, jdk, maven
+		(Build Server)			To Perform Application Build and Create Artifacts(*.war)
+	
+	
+	Test-Server 			: 	Install jdk, tomcat
+
+
+	Create Jenkins Slave Node :
+		Launch a VM (ubuntu - 22.0v)
+		
+		SSH Connection :
+		
+			Authentication Methods: 
+				
+				- Password based Authentication
+				- Key based Authentication
+					- Public Key 
+					- Private Key 
+				- Token based Authentication
+				- Passwordless Authentication
+				
+				
+	Jenkins Node Configuration
+	
+	
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/EDU-DCP-Dec16-2024/java-mvn-springbootapp.git'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Build - Compile & Create Artifacts'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Deploy to QA Test Server') {
+            steps {
+                echo 'Deploy the Artifacts to QA Server'
+            }
+        }
+    }
+}
+
+
+
+Deployment to Target Server :::
+
+	QA Testing ::
+	
+	Deployment ????
+	
+	
+	Source Server															Target Server 
+	
+		Jenkins_Slave1															Tomcat_server 
+		
+			Source File :
+			
+				*/target/*.war					============>						/opt/tomcat/webapps/*.war	
+
+	
+
+Publish Over SSH Plugin is used in Jenkins to copy the artifacts 
+
+
+Next :
+
+	Tomcat Server Deployment
+	Build Triggers 	
+	EMail Notifications 
+	
+	Ansible 
+	
