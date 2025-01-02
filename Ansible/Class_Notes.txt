@@ -1,0 +1,142 @@
+#######################
+Day 10 : 30th Dec. 2024
+#######################	
+
+	Configuration Management Using Ansible !
+	
+	Infra-Structure Management :
+	
+		Provision/Create the IT Infra-Structure(Servers and resources) --> Terraform 
+		
+		Configure the IT Infra-Structure --> Ansible
+		
+		
+	Ansible :::
+	
+		What and Why Ansible ?
+		
+		Ansible Architecture
+		
+		Ansible Architecture Components
+		
+		Working with Ansible using 
+		
+			- Ansible Adhoc Commands 
+			- Ansible Playbooks 		# Scipts written using *.yaml 
+			
+		Ansible Roles 
+		
+	
+	What is Ansible ??
+			
+		Configuration Management System !
+			
+			
+			
+		Testing Environments :
+		
+			QA Environment:
+			
+				Test Server!
+				
+				Web Site! -> What are the Test Scenarios?
+				
+				Servers.
+				
+				
+	- Environments :
+	
+		Non-Prod 												Production Environments
+	
+			- Dev Environment
+			- Build Environment
+			- Test Environments
+				- QA Test
+				- UAT Test				===============>			Production Servers
+		
+	
+		Shell Scripts :	
+		
+			IAC - Infra-Structure As Code:
+				- Declarative Scripts using *.json/*.yaml 
+
+				- Terraform and Ansible are IAC Tools 
+
+		Provision/Create the IT Infra-Structure(Servers and resources) --> Terraform 
+		
+		Configure the IT Infra-Structure --> Ansible	
+
+
+		Ansible :
+		
+		Ansible Architecture
+		
+		Ansible Architecture Components		 :
+		
+			- Ansible Controller 
+			
+			- Ansible Nodes 
+			
+			- Inventory File 
+			
+			- Modules 
+			
+			- ansible.config file 
+			
+		
+		How to Interact with Ansible controller :::
+		
+			
+			Adhoc Commands ::
+				- Used to execute a task/module in the any Ansible Node.
+				
+					Install jdk 
+					
+						- apt install jdk11 -y
+						
+						- apt install git -y 
+			
+			
+				Install any package :
+				
+					- Install prerequisites 
+					- Install the actual package 
+					- Post Installation Activities 
+					
+				Jenkins / Tomcat / 
+				
+				Tomcat/Nginx/httpd :
+				
+					- Install JDK 
+					- Install Tomcat 
+					- Started Tomcat 
+				
+				mysqlserver: 
+					- Install prerequisites
+					- Install mysql 
+					- Start mysql
+					- Create Database
+			
+			Playbooks ::
+			
+				- Used to execute some series of tasks/modules in the Ansible Nodes.
+				- Playbooks should be reusable.
+				- Playbooks are written using *.yaml format.
+			
+			
+		Working with Ansible :
+		
+			- Install & Setup the Ansible Controller with the Nodes. 			
+			
+			Inventory File 
+			
+			Playbooks 
+			
+			Modules 
+			
+			
+		- Installed and Configured Ansible Controller & Nodes. 
+		
+		- Create Ansible Inventory File 
+		
+		- Use Adhoc Commands!
