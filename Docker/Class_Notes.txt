@@ -1,0 +1,230 @@
+#######################
+Day 12 : 3rd Jan. 2025
+#######################
+
+- Containerization using Docker!
+	
+	
+	- Containerization :	Is a process of packaging the Applications along with its dependencies.
+	
+	
+	Terminologies :
+	
+		- Virtual Machine :
+		
+			- VMs are called as Hardware level Virtualization
+			- VMs are created by using Hypervisor 
+			- VMs are used to execute the Operating System and its Applications/Tasks.
+			- VMs continue to execute even if there is no Active Applications/Tasks.
+			- VMs consume more resources and Time to start the Applications/Tasks.			
+			
+		- Containers :
+		
+			- Containers are called as OS level Virtualization
+			- Containers are created by using Container Engine 
+			- Containers are used to execute the Applications/Tasks. NOT Operating System.
+			- Containers will immediately goes to Stop/Exit State if there is no Active Applications/Tasks.
+			- Containers consume less resources and Time to start the Applications/Tasks.
+			- Containers run in a dedicated / completely isolated address space.
+			
+			- Core of the Operating System is called Kernel.
+				- Namespace & Control Groups
+				
+			- Containers are used to reduce the no. of VMs.			
+			
+		- Eg.: 
+		
+				50 Test Servers:
+			
+				- Create 50 VMs -> Install required testing 
+				
+				Alternatively, 
+				
+					Create 1 VM :
+						- Install Container Engine 
+							- C1 - jdk,tomcat 
+							- C2 
+							- C3 
+							- C4..........C50
+							
+							
+	
+			Deploy an Application to Target Environment :
+			
+			
+				Developer - Create Code 
+				
+				Build - Create Artifacts --> mywebsvc1.war
+				
+				--> Execute mywebsvc1.war using jdk11,tomcat8 
+
+				- Containerization :	Is a process of packaging the Applications along with its dependencies.
+
+				Package the mywebsvc1.war along with its dependencies.
+				
+					- (mywebsvc1.war,jdk11,tomcat8)	--> mywebsvc1_Image:v1.0
+					
+				Publish the Application Image mywebsvc1_Image:v1.0 to the Container Registry 
+				
+				Deployed mywebsvc1.war to Target Servers 
+				
+				QA -- Download that mywebsvc1_Image:v1.0 from Container Registry & Run as a Container.
+				
+				UAT -- mywebsvc1.war
+			
+				PROD -- mywebsvc1.war
+							
+							
+		- Container Engine :	
+					-->	Used to Create/Manage the Container Images and Containers	
+					--> Docker Container Engine 
+		
+		- Container Image :					
+					--> Container Images are just a static file that defines the properties and the dependencies.
+					--> Container Images are Non-Executable.
+					--> It composed of various layers created based on the Dockerfile Instructions.
+					--> Stored in Container Registry.
+
+		- Container :
+					--> Containers are the executable units of Container Images.
+					--> Containers are used to run the Applications defined in the Container Image.
+		
+		- Container Registry :
+					--> Used to Save/Version Control the Container Images 
+					--> DockerHub is the Container Registry 
+					--> https://hub.docker.com/
+					
+		- Container Repositories :
+					--> Subset of Container Registry
+					
+		- Docker CLI Commands :
+					--> Used to Interact with Docker Engine/Daemon
+					
+			
+	Working with Docker ::
+
+		Install Docker Container Engine
+		https://docs.docker.com/engine/install/
+		
+		Goto the Jenkins Slave Node & install Docker using :
+
+				sudo apt install docker.io -y
+				
+				docker --version 
+				
+	Docker Cli Commands :::	
+								
+		docker --version 			# Get the docker version 
+		
+		docker images 				# Get the list of Container Images in local machine 
+		
+		docker ps 					# Get the list of Active/Running Containers in local machine 
+		
+		docker ps -a 				# Get the list of Active/Running as well as the InActive/Stopped Containers in local machine 
+		
+		docker pull <image_name>	# Download Container image from Container Registry to local machine 	
+		
+		docker run <image_name>		# Create and Execute a Container
+		
+			Modes of Container Execution :
+			
+				- Foreground / Attached Mode :	# Default 
+												# Hold the Terminal during execution
+												
+						Eg. :	docker run <image_name>
+								docker run centos sleep 20
+				
+				- Background / Detached Mode :	# Run the Container in Background.
+				
+						Eg.: 	docker run -d <image_name>
+								docker run -d centos sleep 20
+				
+				- Interactive Mode :			# Run the Container interactively.
+				
+						Eg.: 	docker run -it <image_name> bash
+								docker run -it centos bash		
+								
+		docker start <container_id>						# Start the Container 
+		
+		docker exec -it <container_id> bash 			# Login to the running Container
+		#exit											# Log-off		
+				
+		docker stop <container_id>						# Stop/Exit the running container 
+		
+		docker rm <container_id> <container_id>			# Remove the container from Local Machine 
+		docker rm -f <container_id> <container_id>		# Force - Remove the container from Local Machine 
+		
+		docker rmi <image_name>							# Remove the container Image from Local Machine 
+		docker rmi -f <image_name>						# Force - Remove the container Image from Local Machine 
+		
+		
+		docker inspect <container_id>					# Used to inspect/Analyse the docker objects
+		docker inspect <image_name>
+		
+		docker history <image_name>						# Capture the History of changes/layers in any Container Image
+
+    1  apt update -y
+    2  clear
+    3  apt install docker.io -y
+    4  docker --version
+    5* clea
+    6  docker images
+    7  docker ps
+    8  docker ps -a
+    9  docker pull centos
+   10  docker images
+   11  docker ps
+   12  docker ps -a
+   13  docker run centos
+   14  docker ps
+   15  docker ps -a
+   16  docker run centos sleep 20
+   17  clear
+   18  docker run centos sleep 20
+   19  asdf
+   20  clear
+   21  docker run -d centos sleep 20
+   22  docker ps
+   23  clear
+   24  docker ps
+   25  docker ps -a
+   26  docker run -it centos bash
+   27  clear
+   28  docker ps -a
+   29  history
+
+    1  clear
+    2  docker ps
+    3  clear
+    4  docker ps
+    5  docker ps -a
+    6  docker iamges
+    7  docker images
+    8  docker run -it ubuntu bash
+    9  docker ps -a
+   10  docker start 661add805894
+   11  docker ps
+   12  docker exec -it 661add805894 bash
+   13  docker ps
+   14  docker stop 661add805894
+   15  docker ps
+   16  docker ps -a
+   17  clear
+   18  docker images
+   19  docker ps -a
+   20  docker rmi centos
+   21  docker rm 9e32c29555d6 39946628616b da83ea3c3adf 7881c4c643ff
+   22  docker ps -a
+   23  docker rmi centos
+   24  docker rm d2069aee06a1
+   25  docker rmi centos
+   26  docker ps -a
+   27  docker images
+   28  clear
+   29  docker ps -a
+   30  docker inspect 661add805894
+   31  docker inspect ubuntu
+   32  clear
+   33  docker history ubuntu
+   34  docker ps -a
+   35  history
