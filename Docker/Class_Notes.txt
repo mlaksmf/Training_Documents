@@ -228,3 +228,289 @@ Day 12 : 3rd Jan. 2025
    33  docker history ubuntu
    34  docker ps -a
    35  history
+
+
+		
+#######################
+Day 13 : 06th Jan. 2025
+#######################	
+
+	- Docker Container Port Mapping 
+	
+	- Docker Volumes
+	
+	- Create Docker Images 
+	
+	- Push the Images to Container Registry(DockerHub)
+	
+	- Container Orchestration 
+		- Overview of Docker Compose 
+		- Overview of Docker Swarm 
+		
+		- Kubernetes!
+	
+
+
+	- Docker Container Port Mapping ::::
+
+		tomcat / nginx --> WAS 
+		
+		
+			-p <host_port>:<container_port>
+			
+		docker run -it -p 9090:8080 tomcat:8.0 
+		docker run -it -p 9091:8080 tomcat:8.0 
+		docker run -it -p 9092:8080 tomcat:8.0 
+	
+	- Docker Volumes ::::
+	
+		Containers --> used to run Applications/Tasks.
+		
+		Docker Volumes are used to maintain the persistant data.
+		
+			--> Stateless Applications 
+			
+			--> Stateful Applications
+			
+			
+		3 - Tier Application - user Login Service
+	 
+			- Front-End Layer 			C1 
+			
+			- Application Layer 		C2 
+			
+			- Back-End : DataBase Layer C3 
+			
+		
+		docker volume list 
+		
+		docker volume create dcp06-vol1 
+		
+		docker volume inspect dcp06-vol1 
+		
+		docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 ubuntu bash
+		
+		
+	- Create Docker Images :::		
+		
+		Containerization ::: 
+		
+		docker commit :		Used by the infra team to create server templates
+
+		docker commit ::
+		
+			- To Create a New Container Image based on the properties of existing Container.
+			
+			Syntax :
+
+				docker commit <existing_container_id> <dockerhub_repo_name>/New_Image_Name>:<tag_Name>	
+
+			Eg.: 
+			
+				docker commit 661add805894 loksaieta/dcp-git-img1:v1.0
+		
+		
+		
+		docker build ::		Used by developers to create application images based on Dockerfile  
+		
+			- To create a new Container Image based on the Dockerfile reference.
+			- Dockerfile composed of Instructions to Create Docker Container Images
+			- Application Developers create the Dockerfile and update in the Source Code Repository. 		
+		
+			vi Dockerfile 
+			
+			FROM ubuntu 
+			RUN apt update -y
+			RUN apt install git -y
+		
+			Syntax :
+			
+			docker build -t <dockerhub_repo_name>/New_Image_Name>:<tag_Name> .		# '.' refers to the Dockerfile path
+			
+			Eg.:
+			
+			docker build -t loksaieta/dcp-git-img1:v1.1 .		# '.' refers to the Dockerfile path		
+		
+		Write Dockerfile :::
+		
+			Docker File Instructions :::
+			
+			FROM 									# To Identify the Base Image
+			RUN 									# To run the package manager
+			COPY 									# To Copy the file from host volume to container volume
+			CP 										# To Copy the file within the container volumes 
+			ADD 									# To Copy the file from Host Volume as well as from URL
+			ENV 									# To define the Environment Variable 
+			ARG 									# To pass Arguements to the Steps in Dockerfile 
+			EXPOSE									# To Define the Container Port 
+			WORKDIR									# To set the current working directory within the Container 
+			CMD										# To set the default start-up command to the container 
+													  This Command can be changed at run-time.
+			ENTRYPOINT								# To set the default start-up command to the container 
+													  This Command cannot be changed at run-time.			
+		
+		
+			vi Dockerfile :::
+			
+			FROM tomcat:8.0
+			COPY ./target/*.war /usr/local/tomcat/webapps
+			EXPOSE 8080			
+		
+		
+	
+	- Push the Images to Container Registry(DockerHub) :::
+	
+		- Login to DockerHub through Docker CLI using :
+		
+			DockerHub Login ID & Access Token
+			
+			1. Create DockerHub Access Token :
+			
+				docker login -u lokdfsdfsaieta
+			
+				dasfasdfasdfsdfsdf0
+				
+		
+		
+		- docker push <New_Image_Name> 
+			Eg.: 
+				docker push loksaieta/dcp-git-img1:v1.0
+				
+				
+	
+	
+	- Container Orchestration 
+		
+		-> Used to Ensure High Availability of Containers, by create replicas:
+		
+		
+		- Overview of Docker Compose 
+			- Is an extension/Plugin to Docker Engine.
+			- Is used to run multiple containers as a Service!
+			- Docker Compose uses the Yaml file to create the Service definitions
+			
+			- *.yaml Script 
+			
+				Srv1 
+					c1 
+					c2
+					c2 
+
+		3 - Tier Application - user Login Service
+	 
+			- Front-End				# User Interaction 	--> C1.1,C1.2,C1.3 
+				
+			- Application Layer		# Business Logics 	--> C2.1,C2.2,C2.3 
+			
+			- Back-End Layer		# Data_Base			--> C3.1,C3.2,C3.3 
+
+
+
+		
+		
+		- Overview of Docker Swarm 
+		
+			Container Orchestration Tool ::::
+	
+			- Docker Swarm is one the Container Orchestration Tools.
+			- It is meant only for Docker Containers.
+			- Used to Ensure High Availability of Containers by creating Replicas of Containers.
+			- We cannot Do Auto-Scaling or Load Balancing!	
+
+
+				Application_Svc1 :
+				
+					c1.1,c1.2,c1.3
+					
+					1000 Users 		- 3 container replicas 
+					
+					10000 Users 	- 30 
+		
+		
+		- Kubernetes ::::
+		
+			Kubernetes ::::
+			
+				- It is a Open-Source Container Orchestration Tool 
+				- Kubernetes is used to Deploy any type of Containers.
+				- It is used to ensure high availability of the Applications/services running thru Containers.
+				- Used to Ensure High Availability of Containers by creating Replicas of Containers.
+				- It supports Auto-Scaling & Load Balancing.		
+				
+				
+			Kubernetes Manifest File :
+			
+				- Define the properties of Containers
+
+  222  docker ps
+  223  docker imags
+  224  docker images
+  225  docker ps -a
+  226  docker rm 86af207f6161 3697f0d60f2c 3c2216348769 226891e0cd1b
+  227  clear
+  228  docker images
+  229  docker rmi loksaieta/appsv1:v1.0
+  230  docker rmi loksaieta/appsv1:v1.1
+  231  docker rmi loksaieta/dcp-build-env:v1.1
+  232  docker rmi loksaieta/dcp-build-env:v1.0
+  233  clear
+  234  docker ps
+  235  docker images
+  236  clear
+  237* docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 tomcat:8.0 bash
+  238  docker run -it -p 9090:8080 tomcat:8.0
+  239  clear
+  240  docker volume list
+  241  docker volume create dcp06-vol1
+  242  docker volume list
+  243  docker volume inspect dcp06-vol1
+  244  cd /var/lib/docker/volumes/
+  245  cd dc
+  246  cd dcp06-vol1/
+  247  ls
+  248  cd _data/
+  249  ls
+  250  clear
+  251  ls
+  252  docker images
+  253  docker run -it ubuntu bash
+  254  docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 ubuntu bash
+  255  docker ps
+  256  docker ps -a
+  257  pwd
+  258  ls
+  259  echo "rec" >> infile.txt
+  260  ls
+  261  docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 ubuntu bash
+  262  clear
+  263  cd ~
+  264  clear
+  265  docker ps -a
+  266  docker start 661add805894
+  267  docker exec -it 661add805894 bash
+  268  docker images
+  269  docker commit 661add805894 loksaieta/dcp-git-img1:v1.0
+  270  docker images
+  271  docker run -it loksaieta/dcp-git-img1:v1.0 bash
+  272  celar
+  273  clear
+  274  mkdir dockerscripts
+  275  cd docker
+  276  cd dockerscripts/
+  277  ls
+  278  clear
+  279  vi Dockerfile
+  280  docker images
+  281  docker build -t loksaieta/dcp-git-img1:v1.1 .
+  282  docker images
+  283  docker ps -a
+  284  clear
+  285  docker iamges
+  286  docker images
+  287  docker login -u loksaieta
+  288  docker push loksaieta/dcp-git-img1:v1.0
+  289  cd ~
+  290  history
+
+
+Next Kubernetes ::::
