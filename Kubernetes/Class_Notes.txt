@@ -1,0 +1,138 @@
+#######################
+Day 14 : 07th Jan. 2025
+#######################	
+
+
+	Container Orchestration Tool : Kubernetes
+	
+	Kubernetes Architecture 
+	
+	Kubernetes Architecture Components
+	
+	Terminologies
+	
+	Kubernetes Concepts :
+	
+	Install and setup the Kubernetes Cluster
+	
+	Pods
+	Controller Objects 
+		- RC 
+		- RS 
+		- DS 
+		- Deployments 
+		
+	Kubernetes Volumes 
+	
+	Kubernetes Services 
+		- C-IP
+		- NP 
+		- LoadBalancer 
+		
+	HELM Package Manager!
+	
+	
+Kubernetes Architecture :::
+
+	Kubernetes ::::
+	
+		- It is a Open-Source Container Orchestration Tool 
+		- Kubernetes is used to Deploy any type of Containers.
+		- It is used to ensure high availability of the Applications/services running thru Containers.
+		- Used to Ensure High Availability of Containers by creating Replicas of Containers.
+		- It supports Auto-Scaling & Load Balancing.
+
+	Managed Services :
+	
+	AWS 	- ECS/ECR/EKS
+	Azure 	- ACS/ACR/AKS 
+	GCP 	- GCE/GCR/GKE
+	
+	Kubernetes Architecture :::	
+	
+	Components ::
+	
+		Kubernetes Master
+			Kubernetes WorkerNode1
+			Kubernetes WorkerNode2
+			Kubernetes WorkerNode3
+			
+		- API Server 
+		- ETCD 
+		- Scheduler
+		- Controller Manager 
+		
+		- Kubelet 
+		- CRI - Container RunTime Interface - Container-D 
+		- Kube-Proxy
+	
+	Kubernetes Terminologies & Concepts ::
+	
+		--> Kubernetes Manifest File 			# Used to define the properties of the pods for deployment. - *.yaml / *.json
+		
+		--> kubectl								# Command Line Utility - used to interact with Kubernetes Master 
+		
+		--> Container Images
+		
+		--> Containers 
+		
+		--> Container Registry 
+		
+		--> Pods 								# Smallest / Atomic unit of task 
+		
+		--> Kubelet								# Kubernetes Agent responsible to deploy the pods 
+		
+		--> Kubernetes Cluster					# Kubernetes Cluster is the group of WorkerNodes.
+		
+		
+		Kubernetes Master
+			Kubernetes-Cluster1
+				Kubernetes WorkerNode1
+				Kubernetes WorkerNode2
+				Kubernetes WorkerNode3
+				
+		Kubernetes Master
+			Kubernetes-Cluster1
+				Kubernetes WorkerNode1
+				Kubernetes WorkerNode2
+				Kubernetes WorkerNode3
+			Kubernetes-Cluster2
+				Kubernetes WorkerNode1
+				Kubernetes WorkerNode2
+				Kubernetes WorkerNode3
+			Kubernetes-Cluster3
+				Kubernetes WorkerNode1
+				Kubernetes WorkerNode2
+				Kubernetes WorkerNode3
+
+			Kubernetes Master				
+				Kubernetes Master1
+					Kubernetes-Cluster1
+						Kubernetes WorkerNode1
+						Kubernetes WorkerNode2
+						Kubernetes WorkerNode3
+				Kubernetes Master2
+					Kubernetes-Cluster1
+						Kubernetes WorkerNode1
+						Kubernetes WorkerNode2
+						Kubernetes WorkerNode3
+						
+	Install and setup the Kubernetes Architecture ::::
+
+		Kubernetes Master
+			Kubernetes WorkerNode1
+			Kubernetes WorkerNode2
+			
+			
+	minikube 
+	kubeadm 
+	
+		Kubernetes Master
+			Kubernetes WorkerNode1
+			Kubernetes WorkerNode2
+			
+			
+	Create Manifest File to Deploy Kubernetes Objects like pods....
+	
+	
+	Pods :::
