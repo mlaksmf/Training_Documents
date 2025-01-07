@@ -1,0 +1,516 @@
+#######################
+Day 12 : 3rd Jan. 2025
+#######################
+
+- Containerization using Docker!
+	
+	
+	- Containerization :	Is a process of packaging the Applications along with its dependencies.
+	
+	
+	Terminologies :
+	
+		- Virtual Machine :
+		
+			- VMs are called as Hardware level Virtualization
+			- VMs are created by using Hypervisor 
+			- VMs are used to execute the Operating System and its Applications/Tasks.
+			- VMs continue to execute even if there is no Active Applications/Tasks.
+			- VMs consume more resources and Time to start the Applications/Tasks.			
+			
+		- Containers :
+		
+			- Containers are called as OS level Virtualization
+			- Containers are created by using Container Engine 
+			- Containers are used to execute the Applications/Tasks. NOT Operating System.
+			- Containers will immediately goes to Stop/Exit State if there is no Active Applications/Tasks.
+			- Containers consume less resources and Time to start the Applications/Tasks.
+			- Containers run in a dedicated / completely isolated address space.
+			
+			- Core of the Operating System is called Kernel.
+				- Namespace & Control Groups
+				
+			- Containers are used to reduce the no. of VMs.			
+			
+		- Eg.: 
+		
+				50 Test Servers:
+			
+				- Create 50 VMs -> Install required testing 
+				
+				Alternatively, 
+				
+					Create 1 VM :
+						- Install Container Engine 
+							- C1 - jdk,tomcat 
+							- C2 
+							- C3 
+							- C4..........C50
+							
+							
+	
+			Deploy an Application to Target Environment :
+			
+			
+				Developer - Create Code 
+				
+				Build - Create Artifacts --> mywebsvc1.war
+				
+				--> Execute mywebsvc1.war using jdk11,tomcat8 
+
+				- Containerization :	Is a process of packaging the Applications along with its dependencies.
+
+				Package the mywebsvc1.war along with its dependencies.
+				
+					- (mywebsvc1.war,jdk11,tomcat8)	--> mywebsvc1_Image:v1.0
+					
+				Publish the Application Image mywebsvc1_Image:v1.0 to the Container Registry 
+				
+				Deployed mywebsvc1.war to Target Servers 
+				
+				QA -- Download that mywebsvc1_Image:v1.0 from Container Registry & Run as a Container.
+				
+				UAT -- mywebsvc1.war
+			
+				PROD -- mywebsvc1.war
+							
+							
+		- Container Engine :	
+					-->	Used to Create/Manage the Container Images and Containers	
+					--> Docker Container Engine 
+		
+		- Container Image :					
+					--> Container Images are just a static file that defines the properties and the dependencies.
+					--> Container Images are Non-Executable.
+					--> It composed of various layers created based on the Dockerfile Instructions.
+					--> Stored in Container Registry.
+
+		- Container :
+					--> Containers are the executable units of Container Images.
+					--> Containers are used to run the Applications defined in the Container Image.
+		
+		- Container Registry :
+					--> Used to Save/Version Control the Container Images 
+					--> DockerHub is the Container Registry 
+					--> https://hub.docker.com/
+					
+		- Container Repositories :
+					--> Subset of Container Registry
+					
+		- Docker CLI Commands :
+					--> Used to Interact with Docker Engine/Daemon
+					
+			
+	Working with Docker ::
+
+		Install Docker Container Engine
+		https://docs.docker.com/engine/install/
+		
+		Goto the Jenkins Slave Node & install Docker using :
+
+				sudo apt install docker.io -y
+				
+				docker --version 
+				
+	Docker Cli Commands :::	
+								
+		docker --version 			# Get the docker version 
+		
+		docker images 				# Get the list of Container Images in local machine 
+		
+		docker ps 					# Get the list of Active/Running Containers in local machine 
+		
+		docker ps -a 				# Get the list of Active/Running as well as the InActive/Stopped Containers in local machine 
+		
+		docker pull <image_name>	# Download Container image from Container Registry to local machine 	
+		
+		docker run <image_name>		# Create and Execute a Container
+		
+			Modes of Container Execution :
+			
+				- Foreground / Attached Mode :	# Default 
+												# Hold the Terminal during execution
+												
+						Eg. :	docker run <image_name>
+								docker run centos sleep 20
+				
+				- Background / Detached Mode :	# Run the Container in Background.
+				
+						Eg.: 	docker run -d <image_name>
+								docker run -d centos sleep 20
+				
+				- Interactive Mode :			# Run the Container interactively.
+				
+						Eg.: 	docker run -it <image_name> bash
+								docker run -it centos bash		
+								
+		docker start <container_id>						# Start the Container 
+		
+		docker exec -it <container_id> bash 			# Login to the running Container
+		#exit											# Log-off		
+				
+		docker stop <container_id>						# Stop/Exit the running container 
+		
+		docker rm <container_id> <container_id>			# Remove the container from Local Machine 
+		docker rm -f <container_id> <container_id>		# Force - Remove the container from Local Machine 
+		
+		docker rmi <image_name>							# Remove the container Image from Local Machine 
+		docker rmi -f <image_name>						# Force - Remove the container Image from Local Machine 
+		
+		
+		docker inspect <container_id>					# Used to inspect/Analyse the docker objects
+		docker inspect <image_name>
+		
+		docker history <image_name>						# Capture the History of changes/layers in any Container Image
+
+    1  apt update -y
+    2  clear
+    3  apt install docker.io -y
+    4  docker --version
+    5* clea
+    6  docker images
+    7  docker ps
+    8  docker ps -a
+    9  docker pull centos
+   10  docker images
+   11  docker ps
+   12  docker ps -a
+   13  docker run centos
+   14  docker ps
+   15  docker ps -a
+   16  docker run centos sleep 20
+   17  clear
+   18  docker run centos sleep 20
+   19  asdf
+   20  clear
+   21  docker run -d centos sleep 20
+   22  docker ps
+   23  clear
+   24  docker ps
+   25  docker ps -a
+   26  docker run -it centos bash
+   27  clear
+   28  docker ps -a
+   29  history
+
+    1  clear
+    2  docker ps
+    3  clear
+    4  docker ps
+    5  docker ps -a
+    6  docker iamges
+    7  docker images
+    8  docker run -it ubuntu bash
+    9  docker ps -a
+   10  docker start 661add805894
+   11  docker ps
+   12  docker exec -it 661add805894 bash
+   13  docker ps
+   14  docker stop 661add805894
+   15  docker ps
+   16  docker ps -a
+   17  clear
+   18  docker images
+   19  docker ps -a
+   20  docker rmi centos
+   21  docker rm 9e32c29555d6 39946628616b da83ea3c3adf 7881c4c643ff
+   22  docker ps -a
+   23  docker rmi centos
+   24  docker rm d2069aee06a1
+   25  docker rmi centos
+   26  docker ps -a
+   27  docker images
+   28  clear
+   29  docker ps -a
+   30  docker inspect 661add805894
+   31  docker inspect ubuntu
+   32  clear
+   33  docker history ubuntu
+   34  docker ps -a
+   35  history
+
+
+		
+#######################
+Day 13 : 06th Jan. 2025
+#######################	
+
+	- Docker Container Port Mapping 
+	
+	- Docker Volumes
+	
+	- Create Docker Images 
+	
+	- Push the Images to Container Registry(DockerHub)
+	
+	- Container Orchestration 
+		- Overview of Docker Compose 
+		- Overview of Docker Swarm 
+		
+		- Kubernetes!
+	
+
+
+	- Docker Container Port Mapping ::::
+
+		tomcat / nginx --> WAS 
+		
+		
+			-p <host_port>:<container_port>
+			
+		docker run -it -p 9090:8080 tomcat:8.0 
+		docker run -it -p 9091:8080 tomcat:8.0 
+		docker run -it -p 9092:8080 tomcat:8.0 
+	
+	- Docker Volumes ::::
+	
+		Containers --> used to run Applications/Tasks.
+		
+		Docker Volumes are used to maintain the persistant data.
+		
+			--> Stateless Applications 
+			
+			--> Stateful Applications
+			
+			
+		3 - Tier Application - user Login Service
+	 
+			- Front-End Layer 			C1 
+			
+			- Application Layer 		C2 
+			
+			- Back-End : DataBase Layer C3 
+			
+		
+		docker volume list 
+		
+		docker volume create dcp06-vol1 
+		
+		docker volume inspect dcp06-vol1 
+		
+		docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 ubuntu bash
+		
+		
+	- Create Docker Images :::		
+		
+		Containerization ::: 
+		
+		docker commit :		Used by the infra team to create server templates
+
+		docker commit ::
+		
+			- To Create a New Container Image based on the properties of existing Container.
+			
+			Syntax :
+
+				docker commit <existing_container_id> <dockerhub_repo_name>/New_Image_Name>:<tag_Name>	
+
+			Eg.: 
+			
+				docker commit 661add805894 loksaieta/dcp-git-img1:v1.0
+		
+		
+		
+		docker build ::		Used by developers to create application images based on Dockerfile  
+		
+			- To create a new Container Image based on the Dockerfile reference.
+			- Dockerfile composed of Instructions to Create Docker Container Images
+			- Application Developers create the Dockerfile and update in the Source Code Repository. 		
+		
+			vi Dockerfile 
+			
+			FROM ubuntu 
+			RUN apt update -y
+			RUN apt install git -y
+		
+			Syntax :
+			
+			docker build -t <dockerhub_repo_name>/New_Image_Name>:<tag_Name> .		# '.' refers to the Dockerfile path
+			
+			Eg.:
+			
+			docker build -t loksaieta/dcp-git-img1:v1.1 .		# '.' refers to the Dockerfile path		
+		
+		Write Dockerfile :::
+		
+			Docker File Instructions :::
+			
+			FROM 									# To Identify the Base Image
+			RUN 									# To run the package manager
+			COPY 									# To Copy the file from host volume to container volume
+			CP 										# To Copy the file within the container volumes 
+			ADD 									# To Copy the file from Host Volume as well as from URL
+			ENV 									# To define the Environment Variable 
+			ARG 									# To pass Arguements to the Steps in Dockerfile 
+			EXPOSE									# To Define the Container Port 
+			WORKDIR									# To set the current working directory within the Container 
+			CMD										# To set the default start-up command to the container 
+													  This Command can be changed at run-time.
+			ENTRYPOINT								# To set the default start-up command to the container 
+													  This Command cannot be changed at run-time.			
+		
+		
+			vi Dockerfile :::
+			
+			FROM tomcat:8.0
+			COPY ./target/*.war /usr/local/tomcat/webapps
+			EXPOSE 8080			
+		
+		
+	
+	- Push the Images to Container Registry(DockerHub) :::
+	
+		- Login to DockerHub through Docker CLI using :
+		
+			DockerHub Login ID & Access Token
+			
+			1. Create DockerHub Access Token :
+			
+				docker login -u lokdfsdfsaieta
+			
+				dasfasdfasdfsdfsdf0
+				
+		
+		
+		- docker push <New_Image_Name> 
+			Eg.: 
+				docker push loksaieta/dcp-git-img1:v1.0
+				
+				
+	
+	
+	- Container Orchestration 
+		
+		-> Used to Ensure High Availability of Containers, by create replicas:
+		
+		
+		- Overview of Docker Compose 
+			- Is an extension/Plugin to Docker Engine.
+			- Is used to run multiple containers as a Service!
+			- Docker Compose uses the Yaml file to create the Service definitions
+			
+			- *.yaml Script 
+			
+				Srv1 
+					c1 
+					c2
+					c2 
+
+		3 - Tier Application - user Login Service
+	 
+			- Front-End				# User Interaction 	--> C1.1,C1.2,C1.3 
+				
+			- Application Layer		# Business Logics 	--> C2.1,C2.2,C2.3 
+			
+			- Back-End Layer		# Data_Base			--> C3.1,C3.2,C3.3 
+
+
+
+		
+		
+		- Overview of Docker Swarm 
+		
+			Container Orchestration Tool ::::
+	
+			- Docker Swarm is one the Container Orchestration Tools.
+			- It is meant only for Docker Containers.
+			- Used to Ensure High Availability of Containers by creating Replicas of Containers.
+			- We cannot Do Auto-Scaling or Load Balancing!	
+
+
+				Application_Svc1 :
+				
+					c1.1,c1.2,c1.3
+					
+					1000 Users 		- 3 container replicas 
+					
+					10000 Users 	- 30 
+		
+		
+		- Kubernetes ::::
+		
+			Kubernetes ::::
+			
+				- It is a Open-Source Container Orchestration Tool 
+				- Kubernetes is used to Deploy any type of Containers.
+				- It is used to ensure high availability of the Applications/services running thru Containers.
+				- Used to Ensure High Availability of Containers by creating Replicas of Containers.
+				- It supports Auto-Scaling & Load Balancing.		
+				
+				
+			Kubernetes Manifest File :
+			
+				- Define the properties of Containers
+
+  222  docker ps
+  223  docker imags
+  224  docker images
+  225  docker ps -a
+  226  docker rm 86af207f6161 3697f0d60f2c 3c2216348769 226891e0cd1b
+  227  clear
+  228  docker images
+  229  docker rmi loksaieta/appsv1:v1.0
+  230  docker rmi loksaieta/appsv1:v1.1
+  231  docker rmi loksaieta/dcp-build-env:v1.1
+  232  docker rmi loksaieta/dcp-build-env:v1.0
+  233  clear
+  234  docker ps
+  235  docker images
+  236  clear
+  237* docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 tomcat:8.0 bash
+  238  docker run -it -p 9090:8080 tomcat:8.0
+  239  clear
+  240  docker volume list
+  241  docker volume create dcp06-vol1
+  242  docker volume list
+  243  docker volume inspect dcp06-vol1
+  244  cd /var/lib/docker/volumes/
+  245  cd dc
+  246  cd dcp06-vol1/
+  247  ls
+  248  cd _data/
+  249  ls
+  250  clear
+  251  ls
+  252  docker images
+  253  docker run -it ubuntu bash
+  254  docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 ubuntu bash
+  255  docker ps
+  256  docker ps -a
+  257  pwd
+  258  ls
+  259  echo "rec" >> infile.txt
+  260  ls
+  261  docker run -it --mount source=dcp06-vol1,destination=/dcp06-vol1 ubuntu bash
+  262  clear
+  263  cd ~
+  264  clear
+  265  docker ps -a
+  266  docker start 661add805894
+  267  docker exec -it 661add805894 bash
+  268  docker images
+  269  docker commit 661add805894 loksaieta/dcp-git-img1:v1.0
+  270  docker images
+  271  docker run -it loksaieta/dcp-git-img1:v1.0 bash
+  272  celar
+  273  clear
+  274  mkdir dockerscripts
+  275  cd docker
+  276  cd dockerscripts/
+  277  ls
+  278  clear
+  279  vi Dockerfile
+  280  docker images
+  281  docker build -t loksaieta/dcp-git-img1:v1.1 .
+  282  docker images
+  283  docker ps -a
+  284  clear
+  285  docker iamges
+  286  docker images
+  287  docker login -u loksaieta
+  288  docker push loksaieta/dcp-git-img1:v1.0
+  289  cd ~
+  290  history
+
+
+Next Kubernetes ::::

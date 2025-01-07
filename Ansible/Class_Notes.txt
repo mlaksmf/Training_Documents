@@ -140,3 +140,37 @@ Day 10 : 30th Dec. 2024
 		- Create Ansible Inventory File 
 		
 		- Use Adhoc Commands!
+
+
+#######################
+Day 11 : 2nd Jan. 2025
+#######################
+
+	Ansible Adhoc Commands
+
+	Playbooks 
+	
+	- Handling Variables 
+	
+	- Modules 
+	
+	- Roles 
+	
+	Docker!
+	
+	
+	
+	Handling Ansible Variables :
+	
+		- Ansible Environment Variables :
+		
+			- using setup Module 
+			
+		- User - Defined Variables :
+
+		- Ansible Roles :
+		
+		
+Next :
+
+	Docker 
