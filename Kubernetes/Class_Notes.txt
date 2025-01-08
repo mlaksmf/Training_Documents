@@ -136,3 +136,129 @@ Kubernetes Architecture :::
 	
 	
 	Pods :::
+
+
+
+
+#######################
+Day 15 : 08th Jan. 2025
+#######################	
+
+Concepts :
+	Pods
+	Controller Objects 
+		- RC 
+		- RS 
+		- DS 
+		- Deployments 
+		
+	Kubernetes Volumes 
+	
+	Kubernetes Services 
+		- C-IP
+		- NP 
+		- LoadBalancer 
+		
+	HELM Package Manager!	
+	
+	
+	Controller Objects 
+		- Replication Controller and Replicaset :::
+		
+			Both RC and RS are used to create replicas of Pods to ensure high availability of application service.
+			It is used to execute specific no. of Pods Instances
+			replica - 3 
+			
+			Replicaset is the enhanced version of Replication Controller
+			
+			RC - Used the Equal to based Operator 
+				
+				Pod 
+				
+					Envi=QA1
+					Envi=QA2
+					
+			
+			RS - Used the Set Based Operator
+			
+					Envi:{QA1,QA2}
+					
+			RS - Get created automatically when we create Deployment Objects.
+			
+			
+			3 replicas pods :
+			
+				Scale-up 
+				Scale-down 
+				
+				
+		- DaemonSet :::
+		
+			- Used to Execute a copy of pod in all the available node 
+			
+			- Monitoring / Logger / reporting tool services
+			
+			- Whenever we add any new node to cluster, DaemonSet will allocate a pod in that node 
+			
+			
+		- Deployment Controller Object :::
+
+			- Used to Create Replicas of Pods 
+			- Scale-up / Scale-down the Pod Instance 
+			- Upgrade the Application Service 
+			- Downgrade the Application Service 
+			- Here, Upgrade & Downgrade can be done without any downtime.
+			
+			- Deployment Controller used Rolling-Update Strategy for Deployments
+			
+			- RS created automatically when we create Deployment Objects.
+			
+			Pods :
+			
+				Initial Version :::					New Version ::: 
+				
+				p1	-> v1.1								p1	-> v1.2	
+				p2	-> v1.1							
+				p3	-> v1.1
+			
+		
+	Kubernetes Services :::
+	
+		- ClusterIP Service 
+		- NodePort					30000 - 32767
+		- LoadBalancer 
+		
+		
+	Kubernetes Volumes 		:::
+	
+		- Used to maintain the persistant data.
+		
+		Types: 
+		
+			- hostpath Volume 			--> Same as Container Volume 
+										--> This Volume will be create in the Node where the Pods are deployed 
+			- configMaps Volume
+			- Secret_Volumes
+			
+			- Persistant Volume &
+			- Persistant Volume Claim
+		
+	
+Next :
+
+	- configMaps Volume
+	- Secret_Volumes
+	
+	- Helm Charts 
+	
+	
+Monitoring :::
+
+	
+	- Prometheus/Grafana
+	
+	
+Terraform :::
+
+CICD Pipeline 
+		
