@@ -262,3 +262,147 @@ Terraform :::
 
 CICD Pipeline 
 		
+#######################
+Day 16 : 09th Jan. 2025
+#######################			
+	
+
+	- configMaps Volume ::::
+	- Secret Volume
+	
+		-- Type of Kubernetes Volumes 
+		
+		--> Both ConfigMaps and Secret Volumes are used to pass runtime input files to the Pods 
+		--> ConfigMaps are used to share the general data 
+		--> Secret Volumes are used to share the sensitive data. Here, the data is encrypted and it can be accessible only within the pod. We cannot access the Data outside the pod.
+		
+		
+	- Namespaces :::
+	
+		--> Logical Partitions of Kubernetes Cluster.
+		--> Logically Isolated path to execute the pods or any Kubernetes Objects
+		
+		
+		Non-Prod ::
+		
+			dev 
+			qa 
+			uat 
+		
+		Non-Prod 
+		
+		Kubernetes_Master 
+		
+			Kubernetes_WorkerNode1,2,3,4,5 :::
+			
+			kubectl create namespace dev
+			
+			kubectl get pods --namespace=dev
+			
+			DEV Namespace 
+			
+			QA Namespace 	--> Protect 
+			
+			RBAC 		
+			
+		
+		Prod 
+		
+		Kubernetes_Master 
+		
+			Kubernetes_WorkerNodes :::
+			
+			ACTIVE_PROD Namespace 
+
+root@kmaster-node:~/kubernetes# cat nginx-devpod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: dev
+  labels:
+    app: nginx
+    tier: dev
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+	
+	
+	
+	--> Helm ::::
+	
+		Package Manager :::
+		
+			-> Used to install/Un-install/Update the Software Packages in Linux!
+			
+				apt 
+				
+				yum 
+				
+				dnf 
+	
+		
+
+				Kubernetes Master2
+						Kubernetes WorkerNode1
+						Kubernetes WorkerNode2
+						Kubernetes WorkerNode3,............,100
+						
+						
+		Helm is a package Manager to manage the package for Kubernetes Cluster.
+		
+		
+		Kubernetes : - Open-Source 
+		
+						-- CUI
+						
+						-- To Create Kubernetes Dashboard :;
+						
+							1. Kubernetes-Dashboard 	
+							
+							2. Prometheus/Grafana
+							
+
+# myappsvcdeploy.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loksai-eta-deploy
+  labels:
+    app: loksai-eta-deploy-lbl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loksai-eta-app
+  template:
+    metadata:
+      labels:
+        app: loksai-eta-app
+    spec:
+      containers:
+      - name: loksai-eta-container
+        image: loksaieta/wd-webapp
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loksai-eta-np-service
+  labels:
+    app: loksai-eta-app
+spec:
+  selector:
+    app: loksai-eta-deploy-lbl
+
+  type: NodePort
+  ports:
+  - nodePort: 31028
+    port: 8080
+    targetPort: 8080
+	
