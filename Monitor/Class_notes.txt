@@ -38,3 +38,22 @@ Next :::
 				
 				
 				Architecture of Monitoring Tool 
+
+
+#######################
+Day 17 : 10th Jan. 2025
+#######################	
+
+	Prometheus/Grafana:
+	
+		Prometheus 		--> Infra-Structure Monitoring Tool
+			
+		Grafana 		--> Visualization Tool - To create Monitoring Dashboards		
+		
+		- Architecture of Monitoring Tool ::
+		
+		- Install and Configure Prometheus/Grafana ::
+		
+		
+		
+		- PromQL -- Used to extract the metrics from Target Node!
