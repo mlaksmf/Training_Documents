@@ -1,0 +1,141 @@
+#######################
+Day 17 : 10th Jan. 2025
+#######################	
+	
+
+	IAC Tool - Terraform :::
+	
+	Fundamentals of Terraform :::
+	
+	CM Tool - Ansible 
+	
+	Infra-Structure As Code! 
+	
+		Resource Provision/Create		--> Terraform/Cloudformation/ARM
+		
+		Resource Configuration			--> Ansible/Chef/Puppet
+		
+	
+		Terraform Architecture :
+		
+		Terraform Working Model :
+		
+			- Identify the Scope - Target Platform (AWS)
+			
+			- Write Terraform Script 
+			
+			- Perform Terraform Init 			# Initialize the Terraform Providers 
+												# One time process within the project
+			
+			- Perform Terraform Plan 			# To Preview the Terraform Script 
+			
+			- Perform Terraform Apply 			# To Implement the changes in Target Platform
+			
+			
+		Install Terraform :::
+		
+			- Install Terraform in the User Local Machine (Windows)
+					https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+					
+					https://developer.hashicorp.com/terraform/install
+					
+				Using Manual Approach - Install Terraform on local windows machine 
+				
+					- Download Windows AMD64 Version Terraform -- zipfile 
+						- Right Click and Extract all 
+							- Get the Extracted Terraform Folder 
+								- Get the terraform - binary file 
+								
+					- Setup Environment Variable for terraform binary file 
+						- from windows start menu, search for enviroment variable 
+							- click of edit enviroment variable setting 
+								- find system properties dialog 
+									- select enviroment variables button
+										- On Environment Variables Dialog 
+											- goto to System Variable 
+												- Select path variable and edit 
+													- Click on New 
+														- add C:\Softwares\terraform_1.7.2_windows_amd64
+															- apply the changes and close the settings
+					
+					
+			- Visual Studio Code to create Terraform Scripts 
+					Install VS Code : https://code.visualstudio.com/download
+					
+					Open VS Code 
+					Install Terraform Extension
+					
+					Create Terraform Project
+					
+					Use Terminal to execute Terraform cli commands 
+					
+					Create *.tf
+					
+					
+					
+			- Identify the Scope - Target Platform (AWS)
+			
+			- Write Terraform Script 
+			
+			- Perform Terraform Init 			# Initialize and Download the Terraform Providers 
+												# One time process within the project
+			
+			- Perform Terraform Plan 			# To Preview the Terraform Script 
+			
+			- Perform Terraform Apply 			# To Implement the changes in Target Platform		
+
+
+
+		- Create an EC2 Instance using Terraform :
+		
+			- Enable user Authentication 
+			
+			- Create AWS Access Token to Login to AWS Account thru Terraform Script.
+					AKsdfsdfRNF
+					
+					5kbjsfsdfsdfim6
+					
+#aws.tf 
+
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "AsdfsdfRNF"
+  secret_key = "5dfgdfgdfgdfgz1im6"
+}
+
+# Create AWS Instance
+
+resource "aws_instance" "instance9" {
+  
+  ami           = "ami-021e165d8c4ff761d"
+  instance_type = "t2.micro"
+  key_name      = "may20-keypair"
+  
+  tags = {
+    Name = "DCP-Jan10-Test-Instance"
+  }
+}
+
+	
+		Terraform Registries :::
+		
+			https://registry.terraform.io/browse/providers
+			
+			
+		Using Terrafom :
+		
+			-> Create/Add Resource					+ 
+			
+			-> Update/Modify Resource				~
+			
+			-> Delete/Destroy Resource				-
+			
+			
+		Terraform State file!
+		
+		
+Next ::
+
+	Demo Terraform
+		
+	CICD Demo 
