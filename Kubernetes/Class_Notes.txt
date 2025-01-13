@@ -406,3 +406,97 @@ spec:
     port: 8080
     targetPort: 8080
 	
+
+#######################
+Day 18 : 13th Jan. 2025
+#######################		
+
+	Demo Terraform ::
+	
+		Terraform State file!
+			terraform.tfstate 
+				- Create upon very first successful terraform apply
+			
+	CICD Demo ::: 
+	
+	Servers :
+	
+		- Jenkins_Master					# jdk,git,jenkins 
+			Jenkins_Slave1					# git,jdk,maven
+	
+		- Kubernetes_Master					
+			Kubernetes_WorkerNode1
+			Kubernetes_WorkerNode2
+			Kubernetes_WorkerNode3
+			
+	CICD Pipeline :
+	
+	Stages :
+	
+		- SCM_Checkout
+		- Application_Build 							# *.war
+		- Application_Image_Build						# *.war  ===> AppImage:v1
+		- Login to Container Registry 
+		- Push the Appln. Image to Container Registry 
+		
+		- Deploy Appln. Image to Kubernetes Cluster
+		
+##################################################################
+
+pipeline {
+
+    agent { label 'slave1' }
+
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid1')
+	}
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/EDU-DCP-Dec16-2024/java-mvn-springbootapp.git'
+            }
+        }
+        stage('Application_Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/dcp-13-webapp:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/dcp-13-webapp:${BUILD_NUMBER} loksaieta/dcp-13-webapp:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/dcp-13-webapp:latest"
+			}
+		}
+		stage('Deploy to Kubernetes') {
+            steps {
+				script {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'DCP-13_Kmaster', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f kubedeploy.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}	
+            }
+		}
+    }
+}
+
+
+kubectl create -f kubedeploy.yaml			# Create the kubernetes Object
+
+kubectl apply -f kubedeploy.yaml			# Create/Update the kubernetes Object
+
+
